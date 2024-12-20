@@ -196,7 +196,7 @@ impl Event {
 
                     #log_match_data
 
-                    return log.topics.get(0).expect("bounds already checked").as_ref()
+                    return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                         == Self::TOPIC_ID;
                 }
 
@@ -286,7 +286,7 @@ mod tests {
                         if log.data.len() != 0usize {
                             return false;
                         }
-                        return log.topics.get(0).expect("bounds already checked").as_ref()
+                        return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                             == Self::TOPIC_ID;
                     }
                     pub fn decode(
@@ -371,7 +371,7 @@ mod tests {
                         if log.data.len() != 0usize {
                             return false;
                         }
-                        return log.topics.get(0).expect("bounds already checked").as_ref()
+                        return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                             == Self::TOPIC_ID;
                     }
                     pub fn decode(
@@ -485,7 +485,7 @@ mod tests {
                         if log.data.len() != 32usize {
                             return false;
                         }
-                        return log.topics.get(0).expect("bounds already checked").as_ref()
+                        return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                             == Self::TOPIC_ID;
                     }
                     pub fn decode(
@@ -628,7 +628,7 @@ mod tests {
                         if log.data.len() != 0usize {
                             return false;
                         }
-                        return log.topics.get(0).expect("bounds already checked").as_ref()
+                        return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                             == Self::TOPIC_ID;
                     }
                     pub fn decode(

@@ -2169,7 +2169,7 @@ pub mod events {
             if log.data.len() < 64usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2264,7 +2264,7 @@ pub mod events {
             if log.data.len() < 128usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2383,7 +2383,7 @@ pub mod events {
             if log.data.len() != 64usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2511,7 +2511,7 @@ pub mod events {
             if log.data.len() != 64usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2623,7 +2623,7 @@ pub mod events {
             if log.data.len() != 64usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2733,7 +2733,7 @@ pub mod events {
             if log.data.len() != 32usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2814,7 +2814,7 @@ pub mod events {
             if log.data.len() != 0usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2882,7 +2882,7 @@ pub mod events {
             if log.data.len() != 0usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -2962,7 +2962,7 @@ pub mod events {
             if log.data.len() < 64usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3044,7 +3044,7 @@ pub mod events {
             if log.data.len() != 128usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3160,7 +3160,7 @@ pub mod events {
             if log.data.len() < 160usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3246,7 +3246,7 @@ pub mod events {
             if log.data.len() < 160usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3332,7 +3332,7 @@ pub mod events {
             if log.data.len() != 64usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3420,7 +3420,7 @@ pub mod events {
             if log.data.len() != 32usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3506,7 +3506,7 @@ pub mod events {
             if log.data.len() != 32usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3585,7 +3585,7 @@ pub mod events {
             if log.data.len() != 0usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3666,7 +3666,7 @@ pub mod events {
             if log.data.len() != 0usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
@@ -3746,7 +3746,7 @@ pub mod events {
             if log.data.len() != 0usize {
                 return false;
             }
-            return log.topics.get(0).expect("bounds already checked").as_ref()
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
                 == Self::TOPIC_ID;
         }
         pub fn decode(
