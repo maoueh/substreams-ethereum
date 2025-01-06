@@ -33,7 +33,12 @@
         "internalType": "Tuple1",
         "name": "param0",
         "type": "tuple",
-        "components": [{ "name": "field0", "type": "address" }]
+        "components": [
+          {
+            "name": "field0",
+            "type": "address"
+          }
+        ]
       }
     ],
     "name": "EventUTupleAddress",
@@ -47,7 +52,12 @@
         "internalType": "TupleBool",
         "name": "param0",
         "type": "tuple",
-        "components": [{ "name": "field0", "type": "bool" }]
+        "components": [
+          {
+            "name": "field0",
+            "type": "bool"
+          }
+        ]
       }
     ],
     "name": "EventUTupleBool",
@@ -607,7 +617,11 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "address", "name": "sender", "type": "address" }
+          {
+            "internalType": "address",
+            "name": "sender",
+            "type": "address"
+          }
         ],
         "name": "",
         "type": "tuple"
@@ -621,7 +635,12 @@
     "stateMutability": "view",
     "type": "function",
     "name": "funInt128",
-    "inputs": [{ "name": "arg0", "type": "int128" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "int128"
+      }
+    ],
     "outputs": [],
     "gas": 2310
   },
@@ -629,7 +648,12 @@
     "stateMutability": "view",
     "type": "function",
     "name": "funWithOverloads",
-    "inputs": [{ "name": "arg0", "type": "int128" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "int128"
+      }
+    ],
     "outputs": [],
     "gas": 2310
   },
@@ -637,36 +661,194 @@
     "stateMutability": "view",
     "type": "function",
     "name": "funWithOverloads",
-    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "uint256"
+      }
+    ],
     "outputs": [],
     "gas": 2310
   },
-	{
+  {
     "stateMutability": "view",
     "type": "function",
     "name": "funWithOverloadsLeadingUnderscore",
-    "inputs": [{ "name": "arg0", "type": "int128" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "int128"
+      }
+    ],
     "outputs": []
   },
   {
     "stateMutability": "view",
     "type": "function",
     "name": "_funWithOverloadsLeadingUnderscore",
-    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "uint256"
+      }
+    ],
     "outputs": []
   },
-	{
+  {
     "stateMutability": "view",
     "type": "function",
     "name": "funWithOverloadsCasing",
-    "inputs": [{ "name": "arg0", "type": "int128" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "int128"
+      }
+    ],
     "outputs": []
   },
   {
     "stateMutability": "view",
     "type": "function",
     "name": "FunWithOverloadsCasing",
-    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "uint256"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "Tuple1",
+        "name": "param0",
+        "type": "tuple",
+        "components": [
+          {
+            "name": "field0",
+            "type": "address"
+          },
+          {
+            "name": "field1",
+            "type": "address"
+          },
+          {
+            "name": "field2",
+            "type": "address"
+          },
+          {
+            "name": "field3",
+            "type": "address"
+          },
+          {
+            "name": "field4",
+            "type": "address"
+          },
+          {
+            "name": "field5",
+            "type": "address"
+          },
+          {
+            "name": "field6",
+            "type": "address"
+          },
+          {
+            "name": "field7",
+            "type": "address"
+          },
+          {
+            "name": "field8",
+            "type": "address"
+          },
+          {
+            "name": "field9",
+            "type": "address"
+          },
+          {
+            "name": "field10",
+            "type": "address"
+          },
+          {
+            "name": "field11",
+            "type": "address"
+          },
+          {
+            "name": "field12",
+            "type": "address"
+          }
+        ]
+      }
+    ],
+    "name": "EventTupleMoreThanTwelveFields",
+    "type": "event"
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "funTupleMoreThanTwelveFields",
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "tuple",
+        "components": [
+          {
+            "name": "field0",
+            "type": "address"
+          },
+          {
+            "name": "field1",
+            "type": "address"
+          },
+          {
+            "name": "field2",
+            "type": "address"
+          },
+          {
+            "name": "field3",
+            "type": "address"
+          },
+          {
+            "name": "field4",
+            "type": "address"
+          },
+          {
+            "name": "field5",
+            "type": "address"
+          },
+          {
+            "name": "field6",
+            "type": "address"
+          },
+          {
+            "name": "field7",
+            "type": "address"
+          },
+          {
+            "name": "field8",
+            "type": "address"
+          },
+          {
+            "name": "field9",
+            "type": "address"
+          },
+          {
+            "name": "field10",
+            "type": "address"
+          },
+          {
+            "name": "field11",
+            "type": "address"
+          },
+          {
+            "name": "field12",
+            "type": "address"
+          }
+        ]
+      }
+    ],
     "outputs": []
   }
 ]

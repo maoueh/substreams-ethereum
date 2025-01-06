@@ -10,7 +10,7 @@ use heck::ToUpperCamelCase;
 use proc_macro2::{Span, TokenStream};
 use quote::quote;
 
-use crate::to_syntax_string;
+use crate::{is_long_tuple, to_syntax_string};
 
 use super::{from_token, get_output_kinds, param_names, rust_type, to_token};
 
@@ -19,6 +19,7 @@ struct Inputs {
     decoded_values: TokenStream,
     decoded_fields: Vec<TokenStream>,
     fields: Vec<TokenStream>,
+    has_any_long_tuple: bool,
 }
 
 struct Outputs {
@@ -188,6 +189,7 @@ impl<'a> From<(String, &'a ethabi::Function)> for Function {
                 decoded_values: input_ethabi_param_types,
                 decoded_fields: input_struct_decoded_fields,
                 fields: input_struct_fields,
+                has_any_long_tuple: f.inputs.iter().any(|param| is_long_tuple(&param.kind)),
             },
             outputs: Outputs {
                 implementation: output_implementation,
@@ -266,8 +268,18 @@ impl Function {
             },
         };
 
+        let struct_header = if self.inputs.has_any_long_tuple {
+            quote! {
+                #[derive(Clone)]
+            }
+        } else {
+            quote! {
+                #[derive(Debug, Clone, PartialEq)]
+            }
+        };
+
         quote! {
-            #[derive(Debug, Clone, PartialEq)]
+            #struct_header
             pub struct #camel_name {
                 #(#function_fields),*
             }

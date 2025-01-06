@@ -2,7 +2,7 @@ use heck::{ToSnakeCase, ToUpperCamelCase};
 use proc_macro2::{Span, TokenStream};
 use quote::quote;
 
-use crate::{decode_topic, fixed_data_size, min_data_size, rust_type_indexed};
+use crate::{decode_topic, fixed_data_size, is_long_tuple, min_data_size, rust_type_indexed};
 
 use super::{from_token, rust_type, to_syntax_string};
 
@@ -15,6 +15,7 @@ pub struct Event {
     topic_hash: [u8; 32],
     topic_count: usize,
     min_data_size: usize,
+    has_any_long_tuple: bool,
     fixed_data_size: Option<usize>,
     log_fields: Vec<TokenStream>,
     decode_indexed_fields: Vec<TokenStream>,
@@ -134,6 +135,7 @@ impl<'a> From<(&'a String, &'a ethabi::Event)> for Event {
             topic_count,
             fixed_data_size,
             min_data_size,
+            has_any_long_tuple: e.inputs.iter().any(|input| is_long_tuple(&input.kind)),
             log_fields,
             decode_indexed_fields,
             decode_unindexed_fields,
@@ -180,8 +182,18 @@ impl Event {
             }
         };
 
+        let struct_header = if self.has_any_long_tuple {
+            quote! {
+                #[derive(Clone)]
+            }
+        } else {
+            quote! {
+                #[derive(Debug, Clone, PartialEq)]
+            }
+        };
+
         quote! {
-            #[derive(Debug, Clone, PartialEq)]
+            #struct_header
             pub struct #camel_name {
                 #(#log_fields),*
             }

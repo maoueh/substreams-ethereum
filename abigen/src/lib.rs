@@ -192,6 +192,30 @@ fn min_data_size(input: &ParamType) -> usize {
     }
 }
 
+/// Check if the given ParamType (recursively navigating through the types if necessary)
+/// is a long tuple (i.e. has more than 12 elements). Those indeed cannot have Debug/PartialEq
+/// defined.
+fn is_long_tuple(input: &ParamType) -> bool {
+    match input {
+        ParamType::Address
+        | ParamType::Int(_)
+        | ParamType::Uint(_)
+        | ParamType::Bool
+        | ParamType::FixedBytes(_)
+        | ParamType::Bytes
+        | ParamType::String => false,
+        ParamType::Array(sub_type) => is_long_tuple(sub_type),
+        ParamType::FixedArray(ref sub_type, _) => is_long_tuple(sub_type),
+        ParamType::Tuple(ref types) => {
+            if types.len() > 12 {
+                return true;
+            }
+
+            types.iter().any(is_long_tuple)
+        }
+    }
+}
+
 // fn template_param_type(input: &ParamType, index: usize) -> proc_macro2::TokenStream {
 //     let t_ident = syn::Ident::new(&format!("T{}", index), Span::call_site());
 //     let u_ident = syn::Ident::new(&format!("U{}", index), Span::call_site());

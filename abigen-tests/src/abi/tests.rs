@@ -1571,6 +1571,202 @@ pub mod functions {
             self.encode()
         }
     }
+    #[derive(Clone)]
+    pub struct FunTupleMoreThanTwelveFields {
+        pub arg0: (
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+        ),
+    }
+    impl FunTupleMoreThanTwelveFields {
+        const METHOD_ID: [u8; 4] = [2u8, 176u8, 207u8, 100u8];
+        pub fn decode(
+            call: &substreams_ethereum::pb::eth::v2::Call,
+        ) -> Result<Self, String> {
+            let maybe_data = call.input.get(4..);
+            if maybe_data.is_none() {
+                return Err("no data to decode".to_string());
+            }
+            let mut values = ethabi::decode(
+                    &[
+                        ethabi::ParamType::Tuple(
+                            vec![
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address
+                            ],
+                        ),
+                    ],
+                    maybe_data.unwrap(),
+                )
+                .map_err(|e| format!("unable to decode call.input: {:?}", e))?;
+            values.reverse();
+            Ok(Self {
+                arg0: {
+                    let tuple_elements = values
+                        .pop()
+                        .expect(INTERNAL_ERR)
+                        .into_tuple()
+                        .expect(INTERNAL_ERR);
+                    (
+                        tuple_elements[0usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[1usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[2usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[3usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[4usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[5usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[6usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[7usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[8usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[9usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[10usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[11usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[12usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                    )
+                },
+            })
+        }
+        pub fn encode(&self) -> Vec<u8> {
+            let data = ethabi::encode(
+                &[
+                    ethabi::Token::Tuple(
+                        vec![
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.0)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.1)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.2)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.3)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.4)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.5)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.6)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.7)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.8)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.9)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.10)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.11)),
+                            ethabi::Token::Address(ethabi::Address::from_slice(& self
+                            .arg0.12))
+                        ],
+                    ),
+                ],
+            );
+            let mut encoded = Vec::with_capacity(4 + data.len());
+            encoded.extend(Self::METHOD_ID);
+            encoded.extend(data);
+            encoded
+        }
+        pub fn match_call(call: &substreams_ethereum::pb::eth::v2::Call) -> bool {
+            match call.input.get(0..4) {
+                Some(signature) => Self::METHOD_ID == signature,
+                None => false,
+            }
+        }
+    }
+    impl substreams_ethereum::Function for FunTupleMoreThanTwelveFields {
+        const NAME: &'static str = "funTupleMoreThanTwelveFields";
+        fn match_call(call: &substreams_ethereum::pb::eth::v2::Call) -> bool {
+            Self::match_call(call)
+        }
+        fn decode(
+            call: &substreams_ethereum::pb::eth::v2::Call,
+        ) -> Result<Self, String> {
+            Self::decode(call)
+        }
+        fn encode(&self) -> Vec<u8> {
+            self.encode()
+        }
+    }
     #[derive(Debug, Clone, PartialEq)]
     pub struct FunUint256 {
         pub param0: substreams::scalar::BigInt,
@@ -2909,6 +3105,190 @@ pub mod events {
     }
     impl substreams_ethereum::Event for EventStringIdx {
         const NAME: &'static str = "EventStringIdx";
+        fn match_log(log: &substreams_ethereum::pb::eth::v2::Log) -> bool {
+            Self::match_log(log)
+        }
+        fn decode(log: &substreams_ethereum::pb::eth::v2::Log) -> Result<Self, String> {
+            Self::decode(log)
+        }
+    }
+    #[derive(Clone)]
+    pub struct EventTupleMoreThanTwelveFields {
+        pub param0: (
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+            Vec<u8>,
+        ),
+    }
+    impl EventTupleMoreThanTwelveFields {
+        const TOPIC_ID: [u8; 32] = [
+            16u8,
+            162u8,
+            45u8,
+            165u8,
+            116u8,
+            30u8,
+            27u8,
+            118u8,
+            197u8,
+            12u8,
+            159u8,
+            26u8,
+            240u8,
+            32u8,
+            19u8,
+            1u8,
+            169u8,
+            113u8,
+            11u8,
+            128u8,
+            108u8,
+            244u8,
+            56u8,
+            67u8,
+            168u8,
+            242u8,
+            254u8,
+            247u8,
+            137u8,
+            254u8,
+            167u8,
+            228u8,
+        ];
+        pub fn match_log(log: &substreams_ethereum::pb::eth::v2::Log) -> bool {
+            if log.topics.len() != 1usize {
+                return false;
+            }
+            if log.data.len() != 416usize {
+                return false;
+            }
+            return log.topics.get(0).expect("bounds already checked").as_ref() as &[u8]
+                == Self::TOPIC_ID;
+        }
+        pub fn decode(
+            log: &substreams_ethereum::pb::eth::v2::Log,
+        ) -> Result<Self, String> {
+            let mut values = ethabi::decode(
+                    &[
+                        ethabi::ParamType::Tuple(
+                            vec![
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address, ethabi::ParamType::Address,
+                                ethabi::ParamType::Address
+                            ],
+                        ),
+                    ],
+                    log.data.as_ref(),
+                )
+                .map_err(|e| format!("unable to decode log.data: {:?}", e))?;
+            values.reverse();
+            Ok(Self {
+                param0: {
+                    let tuple_elements = values
+                        .pop()
+                        .expect(INTERNAL_ERR)
+                        .into_tuple()
+                        .expect(INTERNAL_ERR);
+                    (
+                        tuple_elements[0usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[1usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[2usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[3usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[4usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[5usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[6usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[7usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[8usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[9usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[10usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[11usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                        tuple_elements[12usize]
+                            .clone()
+                            .into_address()
+                            .expect(INTERNAL_ERR)
+                            .as_bytes()
+                            .to_vec(),
+                    )
+                },
+            })
+        }
+    }
+    impl substreams_ethereum::Event for EventTupleMoreThanTwelveFields {
+        const NAME: &'static str = "EventTupleMoreThanTwelveFields";
         fn match_log(log: &substreams_ethereum::pb::eth::v2::Log) -> bool {
             Self::match_log(log)
         }
